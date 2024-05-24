@@ -1,0 +1,9 @@
+[Unit]
+Description=My great Go application
+
+[Service]
+ExecStart=/home/maksymprokopov.linux/main
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
