@@ -1,14 +1,11 @@
 - hosts: app
   tasks:
-    - name: Check if Service Exists
-      shell: "if test -f /etc/systemd/system/app.service ; then echo true; else echo false; fi"
-      register: service_exists
-
     - name: Stop Service
       ansible.builtin.systemd:
         name: app
         state: stopped
-      when: service_exists.stdout == "true"
+      # when: service_exists.stdout == "true"
+      ignore_errors: true
       become: true # Use sudo
 
     - name: Enable and start service
@@ -40,4 +37,5 @@
         name: app
         enabled: yes
         state: started
+        daemon_reload: true
       become: true
