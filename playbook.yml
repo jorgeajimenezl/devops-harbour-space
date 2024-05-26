@@ -1,0 +1,43 @@
+- hosts: app
+  tasks:
+    - name: Check if Service Exists
+      shell: "if test -f /etc/systemd/system/app.service ; then echo true; else echo false; fi"
+      register: service_exists
+
+    - name: Stop Service
+      ansible.builtin.systemd:
+        name: app
+        state: stopped
+      when: service_exists.stdout == "true"
+      become: true # Use sudo
+
+    - name: Enable and start service
+      ansible.builtin.systemd:
+        name: app
+        enabled: yes
+        state: started
+      become: true
+
+    - name: Copy artifact
+      copy:
+        src: main
+        dest: /home/vagrant/main
+
+    - name: Make artifact executable
+      file:
+        path: /home/vagrant/main
+        mode: "u+x"
+      become: true # Use sudo
+
+    - name: Copy service definition
+      copy:
+        src: app.service
+        dest: /etc/systemd/system/app.service
+      become: true # use sudo
+
+    - name: Enable and start service
+      ansible.builtin.systemd:
+        name: app
+        enabled: yes
+        state: started
+      become: true
