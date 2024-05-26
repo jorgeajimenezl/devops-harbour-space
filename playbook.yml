@@ -8,20 +8,13 @@
       ignore_errors: true
       become: true # Use sudo
 
-    - name: Enable and start service
-      ansible.builtin.systemd:
-        name: app
-        enabled: yes
-        state: started
-      become: true
-
     - name: Copy artifact
       copy:
         src: main
         dest: /home/vagrant/main
 
     - name: Make artifact executable
-      file:
+      ansible.builtin.file:
         path: /home/vagrant/main
         mode: "u+x"
       become: true # Use sudo
