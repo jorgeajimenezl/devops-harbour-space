@@ -2,7 +2,7 @@
 Description=My great Go application
 
 [Service]
-ExecStart=/home/maksymprokopov.linux/main
+ExecStart=/home/vagrant/main
 Type=simple
 
 [Install]

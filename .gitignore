@@ -1,5 +1,8 @@
 # General
 .vagrant/
 
+# Keys
+keys/
+
 # Log files (if you are creating logs in debug mode, uncomment this)
 # *.log
