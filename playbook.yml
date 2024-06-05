@@ -11,7 +11,7 @@
       ansible.builtin.file:
         path: /home/vagrant/main
         state: directory
-        mode: 777
+        mode: "777"
       become: true # Use sudo
 
     - name: Copy artifact
