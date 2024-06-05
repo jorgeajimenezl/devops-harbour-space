@@ -19,9 +19,9 @@ pipeline {
             }
             steps {
                 sh 'echo "Deploying to stage..."'
-                // ansiblePlaybook credentialsId: 'mykey2',
-                //                 inventory: 'staging.ini',
-                //                 playbook: 'playbook.yml'
+                ansiblePlaybook credentialsId: 'mykey2',
+                                inventory: 'staging.ini',
+                                playbook: 'playbook.yml'
             }
         }
         stage('Deploy to Production') {
@@ -30,9 +30,9 @@ pipeline {
             }
             steps {
                 sh 'echo "Deploying to production..."'
-                // ansiblePlaybook credentialsId: 'aws-key',
-                //                 inventory: 'production.ini',
-                //                 playbook: 'playbook.yml'
+                ansiblePlaybook credentialsId: 'aws-key',
+                                inventory: 'production.ini',
+                                playbook: 'playbook.yml'
             }
         }
     }
