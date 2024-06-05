@@ -7,21 +7,14 @@
       ignore_errors: true
       become: true # Use sudo
 
-    - name: Create artifact directory
-      ansible.builtin.file:
-        path: /home/vagrant
-        state: directory
-        mode: "777"
-      become: true # Use sudo
-
     - name: Copy artifact
       copy:
         src: main
-        dest: /home/vagrant/main
+        dest: /home/main
 
     - name: Make artifact executable
       ansible.builtin.file:
-        path: /home/vagrant/main
+        path: /home/main
         mode: "u+x"
       become: true # Use sudo
 
