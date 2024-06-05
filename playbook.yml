@@ -9,7 +9,7 @@
 
     - name: Create artifact directory
       ansible.builtin.file:
-        path: /home/vagrant/main
+        path: /home/vagrant
         state: directory
         mode: "777"
       become: true # Use sudo
