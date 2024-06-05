@@ -4,8 +4,14 @@
       ansible.builtin.systemd:
         name: app
         state: stopped
-      # when: service_exists.stdout == "true"
       ignore_errors: true
+      become: true # Use sudo
+
+    - name: Create artifact directory
+      ansible.builtin.file:
+        path: /home/vagrant/main
+        state: directory
+        mode: 777
       become: true # Use sudo
 
     - name: Copy artifact

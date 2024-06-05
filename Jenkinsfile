@@ -13,14 +13,25 @@ pipeline {
                 sh 'echo "Build done!!!"'
             }
         }
-        stage('Deploy') {
+        stage('Deploy to Stage') {
             environment {
                 ANSIBLE_HOST_KEY_CHECKING = 'false'
             }
             steps {
                 sh 'echo "Deploying..."'
                 ansiblePlaybook credentialsId: 'mykey2',
-                                inventory: 'hosts.ini',
+                                inventory: 'staging.ini',
+                                playbook: 'playbook.yml'
+            }
+        }
+        stage('Deploy to Production') {
+            environment {
+                ANSIBLE_HOST_KEY_CHECKING = 'false'
+            }
+            steps {
+                sh 'echo "Deploying..."'
+                ansiblePlaybook credentialsId: 'aws-key',
+                                inventory: 'production.ini',
                                 playbook: 'playbook.yml'
             }
         }
